@@ -24,7 +24,7 @@ formElement1?.addEventListener('submit', getRoutesInformation);
 
 function getRoutesInformation(e: Event) {
   e.preventDefault();
-  const formData = formElement1['routes'].value;
+  const formData = formElement1['routes'].value.toUpperCase();
   console.log(formData);
   graph = new Graph(formData);
 }
@@ -33,17 +33,17 @@ formElement2?.addEventListener('submit', getDistance);
 
 function getDistance(e: Event) {
   e.preventDefault();
-  const formData = formElement2['distance'].value;
+  const formData = formElement2['distance'].value.toUpperCase();
   const result = graph.getDistance(formData.replace(/\s/g, '').split(','));
-  resultElement2.innerHTML = `${result}`;
+  resultElement2.innerHTML = `the result is: ${result}`;
 }
 
 formElement3?.addEventListener('submit', getNumberOfTripsOf3);
 
 function getNumberOfTripsOf3(e: Event) {
   e.preventDefault();
-  const input1 = formElement3['start'].value;
-  const input2 = formElement3['end'].value;
+  const input1 = formElement3['start'].value.toUpperCase();
+  const input2 = formElement3['end'].value.toUpperCase();
   const input3 = formElement3['limit'].value;
   const result = graph.getRoutes(input1, input2, input3);
   result.forEach((result) => {
@@ -58,22 +58,22 @@ formElement4?.addEventListener('submit', getAmountOfRoutesByStops);
 
 function getAmountOfRoutesByStops(e: Event) {
   e.preventDefault();
-  const input1 = formElement4['start'].value;
-  const input2 = formElement4['end'].value;
+  const input1 = formElement4['start'].value.toUpperCase();
+  const input2 = formElement4['end'].value.toUpperCase();
   const input3 = formElement4['max'].value;
   const result = graph.findAmountOfRoutesByStops(input1, input2, Number(input3));
-  resultElement4.innerHTML = `${result}`;
+  resultElement4.innerHTML = `the result is: ${result}`;
 }
 
 formElement5?.addEventListener('submit', getLengthOfShortestRoute);
 
 function getLengthOfShortestRoute(e: Event) {
   e.preventDefault();
-  const input1 = formElement5['start'].value;
-  const input2 = formElement5['end'].value;
+  const input1 = formElement5['start'].value.toUpperCase();
+  const input2 = formElement5['end'].value.toUpperCase();
   const result = graph.findLengthOfShortestRoute(input1, input2);
   console.log(result);
-  resultElement5.innerHTML = `${result}`;
+  resultElement5.innerHTML = `the result is: ${result}`;
   console.log(result);
 }
 
@@ -81,8 +81,8 @@ formElement6?.addEventListener('submit', getValuesRoutesByDistance);
 
 function getValuesRoutesByDistance(e: Event) {
   e.preventDefault();
-  const input1 = formElement6['start'].value;
-  const input2 = formElement6['end'].value;
+  const input1 = formElement6['start'].value.toUpperCase();
+  const input2 = formElement6['end'].value.toUpperCase();
   const input3 = formElement6['max'].value;
   const result = graph.getRoutesByDistance(input1, input2, input3);
   result.forEach((result) => {
