@@ -3,7 +3,7 @@ class Graph {
 
   constructor(routes) {
     routes.forEach((route) => {
-      const [start, end, length] = route.split("");
+      const [start, end, length] = route.split('');
 
       if (!this.edges[start]) {
         this.edges[start] = {};
@@ -15,7 +15,7 @@ class Graph {
 
   getDistance(path) {
     if (path.length < 2) {
-      throw new Error("NO SUCH ROUTE");
+      throw new Error('NO SUCH ROUTE');
     }
 
     let result = 0;
@@ -28,7 +28,7 @@ class Graph {
       }
 
       if (!currentNode[next]) {
-        throw new Error("NO SUCH ROUTE");
+        throw new Error('NO SUCH ROUTE');
       }
 
       result = result + currentNode[next];
@@ -77,19 +77,12 @@ class Graph {
         return;
       }
 
-      if (
-        currentNode[end] &&
-        currentDistance + currentNode[end] < maxDistance
-      ) {
+      if (currentNode[end] && currentDistance + currentNode[end] < maxDistance) {
         paths.push([...currentPath, end]);
       }
 
       for (const next in currentNode) {
-        visitNextNodes(
-          [...currentPath, next],
-          this.edges[next],
-          currentDistance + currentNode[next]
-        );
+        visitNextNodes([...currentPath, next], this.edges[next], currentDistance + currentNode[next]);
       }
     };
 
@@ -113,24 +106,14 @@ class Graph {
   }
 }
 
-const graph = new Graph([
-  "AB5",
-  "BC4",
-  "CD8",
-  "DC8",
-  "DE6",
-  "AD5",
-  "CE2",
-  "EB3",
-  "AE7",
-]);
+const graph = new Graph(['AB5', 'BC4', 'CD8', 'DC8', 'DE6', 'AD5', 'CE2', 'EB3', 'AE7']);
 
-console.log(graph.findRoutesByStops("A", "C", 4));
+console.log(graph.findRoutesByStops('A', 'C', 4));
 
-console.log(graph.getRoutes("C", "C", 3));
+console.log(graph.getRoutes('C', 'C', 3));
 
-console.log(graph.getDistance(["A", "B", "C"]));
+console.log(graph.getDistance(['A', 'B', 'C']));
 
-console.log(graph.findShortestRouteDistance("B", "B"));
+console.log(graph.findShortestRouteDistance('B', 'B'));
 
-console.log(graph.findRoutesByDistance("C", "C", 30));
+console.log(graph.findRoutesByDistance('C', 'C', 30));
