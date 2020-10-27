@@ -8,9 +8,9 @@ const resultElement2 = document.querySelector('.result2') as HTMLDivElement;
 
 const formElement3 = document.querySelector('.form3') as HTMLFormElement;
 
-const resultElement3 = document.querySelector('.result3') as HTMLDivElement;
-
 const formElement4 = document.querySelector('.form4') as HTMLFormElement;
+
+const resultElement4 = document.querySelector('.result4') as HTMLDivElement;
 
 const formElement5 = document.querySelector('.form5') as HTMLFormElement;
 
@@ -46,11 +46,23 @@ function getNumberOfTripsOf3(e: Event) {
   const input3 = formElement3['limit'].value;
   const result = graph.getRoutes(input1, input2, input3);
   result.forEach((result) => {
-    const newDiv = document.createElement('div1');
+    const newDiv = document.createElement('div');
     const newContent = document.createTextNode(`${'the result is:'}${result}`);
     newDiv.appendChild(newContent);
     document.body.insertBefore(newDiv, formElement4);
   });
+}
+
+formElement4?.addEventListener('submit', getAmountOfRoutesByStops);
+
+function getAmountOfRoutesByStops(e: Event) {
+  e.preventDefault();
+  const input1 = formElement4['start'].value;
+  const input2 = formElement4['end'].value;
+  const input3 = formElement4['max'].value;
+  const result = graph.findAmountOfRoutesByStops(input1, input2, Number(input3));
+  resultElement4.innerHTML = `${result}`;
+  console.log(result);
 }
 
 // const graph = new Graph('AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7');
