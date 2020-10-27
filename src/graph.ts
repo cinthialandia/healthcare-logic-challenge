@@ -11,8 +11,9 @@ type Route = string[];
 export class Graph {
   edges: Edges = {};
 
-  constructor(routes: string[]) {
-    routes.forEach((route) => {
+  constructor(routes: string) {
+    const splitRoutes = routes.replace(/\s/g, '').split(',');
+    splitRoutes.forEach((route) => {
       const [start, end, length] = route.split('');
 
       if (!this.edges[start]) {

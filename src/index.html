@@ -9,18 +9,22 @@
     <h1>Form</h1>
     <form class="form1">
       <h3>Enter the route information</h3>
-      <textarea name="routes"></textarea>
+      <input type="text" name="routes" value="AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7"></input>
       <button type="submit">submit</button>
     </form>
     <form class="form2">
       <h3>The distance of the route</h3>
       <input name="distance" type="text" />
       <button type="submit">submit</button>
+      <div class="result2"></div>
     </form>
     <form class="form3">
       <h3>The number of trips starting at C and ending at C with a maximum of 3 stops</h3>
-      <input name="3trips" type="text" />
+      <input name="start" type="text" />
+      <input name="end" type="text" />
+      <input name="limit" type="number" />
       <button type="submit">submit</button>
+      <div class="result3"></div>
     </form>
     <form class="form4">
       <h3>The number of trips starting at C and ending at C with a maximum of 4 stops</h3>
@@ -37,6 +41,7 @@
       <input name="lessThan30" type="text" />
       <button type="submit">submit</button>
     </form>
+
     <script src="./index.ts"></script>
   </body>
 </html>

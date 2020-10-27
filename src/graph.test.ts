@@ -1,6 +1,6 @@
 import { Graph } from './graph';
 
-const TEST_INPUT = ['AB5', 'BC4', 'CD8', 'DC8', 'DE6', 'AD5', 'CE2', 'EB3', 'AE7'];
+const TEST_INPUT = 'AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7';
 
 describe('Graph', () => {
   let graph: Graph;
