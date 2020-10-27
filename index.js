@@ -1,69 +1,75 @@
-const graph = {
-  A: { B: 5, D: 5, E: 7 },
-  B: { C: 4 },
-  C: { D: 8, E: 8 },
-  D: { C: 8, E: 6 },
-  E: { B: 3 },
-};
+class Graph {
+  edges = {
+    A: { B: 5, D: 5, E: 7 },
+    B: { C: 4 },
+    C: { D: 8, E: 8 },
+    D: { C: 8, E: 6 },
+    E: { B: 3 },
+  };
 
-function distance(path) {
-  if (path.length < 2) {
-    throw new Error("NO SUCH ROUTE");
-  }
-
-  let result = 0;
-
-  function getNextNode(currentNode, currentPath) {
-    const [next, ...restPath] = currentPath;
-
-    if (!next) {
-      return;
-    }
-
-    if (!currentNode[next]) {
+  distance(path) {
+    if (path.length < 2) {
       throw new Error("NO SUCH ROUTE");
     }
 
-    result = result + currentNode[next];
+    let result = 0;
 
-    getNextNode(graph[next], restPath);
+    const visitNextNode = (currentNode, currentPath) => {
+      const [next, ...restPath] = currentPath;
+
+      if (!next) {
+        return;
+      }
+
+      if (!currentNode[next]) {
+        throw new Error("NO SUCH ROUTE");
+      }
+
+      result = result + currentNode[next];
+
+      visitNextNode(this.edges[next], restPath);
+    };
+
+    const [first, ...restPath] = path;
+    visitNextNode(this.edges[first], restPath);
+
+    return result;
   }
 
-  const [first, ...restPath] = path;
-  getNextNode(graph[first], restPath);
+  findRoutes(start, end, limit) {
+    const paths = [];
 
-  return result;
-}
+    const visitNextNodes = (currentPath, currentNode, currentLimit) => {
+      const restLimit = currentLimit - 1;
+      if (restLimit < 0) {
+        return;
+      }
 
-function findRoutes(start, end, limit) {
-  const paths = [];
+      if (currentNode[end]) {
+        paths.push([...currentPath, end]);
+      }
 
-  function getNextNode(currentPath, currentNode, currentLimit) {
-    const restLimit = currentLimit - 1;
-    if (restLimit < 0) {
-      return;
-    }
+      for (const next in currentNode) {
+        visitNextNodes([...currentPath, next], this.edges[next], restLimit);
+      }
+    };
 
-    if (currentNode[end]) {
-      paths.push([...currentPath, end]);
-    }
+    visitNextNodes([start], this.edges[start], limit);
 
-    for (const nextNode in currentNode) {
-      getNextNode([...currentPath, nextNode], graph[nextNode], restLimit);
-    }
+    return paths;
   }
 
-  getNextNode([start], graph[start], limit);
+  findExactRoutes(start, end, length) {
+    const paths = this.findRoutes(start, end, length);
 
-  return paths;
+    return paths.filter((path) => path.length === length + 1);
+  }
 }
 
-console.log(findRoutes("C", "C", 3));
+const graph = new Graph();
 
-function findExactRoutes(start, end, length) {
-  const paths = findRoutes(start, end, length);
+console.log(graph.findExactRoutes("A", "C", 4));
 
-  return paths.filter((path) => path.length === length + 1);
-}
+console.log(graph.findRoutes("C", "C", 3));
 
-console.log(findExactRoutes("A", "C", 4));
+console.log(graph.distance(["A", "B", "C"]));
