@@ -2,6 +2,8 @@ import { Graph } from './graph';
 
 const formElement1 = document.querySelector('.form1') as HTMLFormElement;
 
+const resultElement1 = document.querySelector('.result1') as HTMLDivElement;
+
 const formElement2 = document.querySelector('.form2') as HTMLFormElement;
 
 const resultElement2 = document.querySelector('.result2') as HTMLDivElement;
@@ -25,8 +27,11 @@ formElement1?.addEventListener('submit', getRoutesInformation);
 function getRoutesInformation(e: Event) {
   e.preventDefault();
   const formData = formElement1['routes'].value.toUpperCase();
-  console.log(formData);
-  graph = new Graph(formData);
+  try {
+    graph = new Graph(formData);
+  } catch (error) {
+    resultElement1.innerHTML = `${error.message}`;
+  }
 }
 
 formElement2?.addEventListener('submit', getDistance);
@@ -34,8 +39,12 @@ formElement2?.addEventListener('submit', getDistance);
 function getDistance(e: Event) {
   e.preventDefault();
   const formData = formElement2['distance'].value.toUpperCase();
-  const result = graph.getDistance(formData.replace(/\s/g, '').split(','));
-  resultElement2.innerHTML = `the result is: ${result}`;
+  try {
+    const result = graph.getDistance(formData.replace(/\s/g, '').split(','));
+    resultElement2.innerHTML = `the result is: ${result}`;
+  } catch (error) {
+    resultElement2.innerHTML = `the result is: ${error.message}`;
+  }
 }
 
 formElement3?.addEventListener('submit', getNumberOfTripsOf3);
