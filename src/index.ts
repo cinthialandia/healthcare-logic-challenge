@@ -20,6 +20,8 @@ const resultElement5 = document.querySelector('.result5') as HTMLDivElement;
 
 const formElement6 = document.querySelector('.form6') as HTMLFormElement;
 
+const resultElement6 = document.querySelector('.result6') as HTMLDivElement;
+
 let graph: Graph = new Graph('AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7');
 
 formElement1?.addEventListener('submit', getRoutesInformation);
@@ -81,9 +83,7 @@ function getLengthOfShortestRoute(e: Event) {
   const input1 = formElement5['start'].value.toUpperCase();
   const input2 = formElement5['end'].value.toUpperCase();
   const result = graph.findLengthOfShortestRoute(input1, input2);
-  console.log(result);
   resultElement5.innerHTML = `the result is: ${result}`;
-  console.log(result);
 }
 
 formElement6?.addEventListener('submit', getValuesRoutesByDistance);
@@ -93,21 +93,6 @@ function getValuesRoutesByDistance(e: Event) {
   const input1 = formElement6['start'].value.toUpperCase();
   const input2 = formElement6['end'].value.toUpperCase();
   const input3 = formElement6['max'].value;
-  const result = graph.getRoutesByDistance(input1, input2, input3);
-  result.forEach((result) => {
-    formElement6.insertAdjacentHTML('afterend', `<div>${'the result is:'}${result}</div>`);
-  });
-  console.log(result);
+  const result = graph.findAmountOfRoutesByDistance(input1, input2, input3);
+  resultElement6.innerHTML = `the result is: ${result}`;
 }
-
-// const graph = new Graph('AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7');
-
-// console.log(graph.findAmountOfRoutesByStops('A', 'C', 4));
-
-// console.log(graph.getRoutes('C', 'C', 3));
-
-// console.log(graph.getDistance(['A', 'B', 'C']));
-
-// console.log(graph.findLengthOfShortestRoute('B', 'B'));
-
-// console.log(graph.getRoutesByDistance('C', 'C', 30));
