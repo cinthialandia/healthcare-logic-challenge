@@ -36,7 +36,7 @@ class Graph {
     return result;
   }
 
-  findRoutes(start, end, limit) {
+  findRoutes(start, end, limit = 3) {
     const paths = [];
 
     const visitNextNodes = (currentPath, currentNode, currentLimit) => {
@@ -64,6 +64,14 @@ class Graph {
 
     return paths.filter((path) => path.length === length + 1);
   }
+
+  findShortestRoute(start, end, limit) {
+    const routes = this.findRoutes(start, end, limit);
+    const routeDistances = routes.map((path) => this.distance(path));
+
+    const [shortestDistance] = routeDistances.sort((a, b) => a - b);
+    return shortestDistance;
+  }
 }
 
 const graph = new Graph();
@@ -73,3 +81,5 @@ console.log(graph.findExactRoutes("A", "C", 4));
 console.log(graph.findRoutes("C", "C", 3));
 
 console.log(graph.distance(["A", "B", "C"]));
+
+console.log(graph.findShortestRoute("B", "B"));
