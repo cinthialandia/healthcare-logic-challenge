@@ -104,7 +104,7 @@ class Graph {
     return paths.filter((path) => path.length === length + 1);
   }
 
-  findShortestRouteDistance(start, end, limit) {
+  findShortestRouteDistance(start, end, limit?) {
     const routes = this.getRoutes(start, end, limit);
     const routeDistances = routes.map((path) => this.getDistance(path));
 

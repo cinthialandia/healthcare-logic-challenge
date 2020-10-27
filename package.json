@@ -1,19 +1,24 @@
 {
-  "name": "healthcare-logic-challenge",
+  "name": "health-ex",
   "version": "1.0.0",
-  "description": "healthcare logic challenge",
+  "description": "healthcare logic interview",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cinthialandia/healthcare-logic-challenge.git"
+    "url": "git+https://github.com/cinthialandia/health-ex.git"
   },
   "author": "Cinthia Valero",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cinthialandia/healthcare-logic-challenge/issues"
+    "url": "https://github.com/cinthialandia/health-ex/issues"
   },
-  "homepage": "https://github.com/cinthialandia/healthcare-logic-challenge#readme"
+  "homepage": "https://github.com/cinthialandia/health-ex#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^4.0.5"
+  }
 }
