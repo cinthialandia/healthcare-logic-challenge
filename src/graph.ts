@@ -75,7 +75,7 @@ export class Graph {
     return routes;
   }
 
-  findRoutesByDistance(start: string, end: string, maxDistance: number): Route[] {
+  getRoutesByDistance(start: string, end: string, maxDistance: number): Route[] {
     if (!maxDistance) {
       return [];
     }
@@ -101,13 +101,21 @@ export class Graph {
     return routes;
   }
 
-  findRoutesByStops(start: string, end: string, length: number): Route[] {
-    const paths = this.getRoutes(start, end, length);
-
-    return paths.filter((path) => path.length === length + 1);
+  findAmountOfRoutesByLimit(start: string, end: string, limit: number): number {
+    return this.getRoutes(start, end, limit).length;
   }
 
-  findShortestRouteDistance(start: string, end: string, limit?: number): number {
+  findAmountOfRoutesByStops(start: string, end: string, length: number): number {
+    const paths = this.getRoutes(start, end, length);
+
+    return paths.filter((path) => path.length === length + 1).length;
+  }
+
+  findAmountOfRoutesByDistance(start: string, end: string, maxDistance: number): number {
+    return this.getRoutesByDistance(start, end, maxDistance).length;
+  }
+
+  findLengthOfShortestRoute(start: string, end: string, limit?: number): number {
     const routes = this.getRoutes(start, end, limit);
     const routeDistances = routes.map((path) => this.getDistance(path));
 
