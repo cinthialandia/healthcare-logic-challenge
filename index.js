@@ -61,4 +61,28 @@ const routes = {
   }
   
   console.log(findRoutes("C", "C", 3));
+
+  function findExactRoutes(start, end, length) {
+    const paths = [];
+  
+    function getNextNode(currentPath, currentNode, currentLength) {
+      const newLength = currentLength + 1;
+      if (newLength === length) {
+        if (currentNode[end]) {
+          paths.push([...currentPath, end]);
+        }
+        return;
+      }
+  
+      for (const nextNode in currentNode) {
+        getNextNode([...currentPath, nextNode], graph[nextNode], newLength);
+      }
+    }
+  
+    getNextNode([start], graph[start], 0);
+  
+    return paths;
+  }
+  
+  console.log(findExactRoutes("A", "C", 4));
   
