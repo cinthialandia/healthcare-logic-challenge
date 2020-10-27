@@ -77,6 +77,20 @@ function getLengthOfShortestRoute(e: Event) {
   console.log(result);
 }
 
+formElement6?.addEventListener('submit', getValuesRoutesByDistance);
+
+function getValuesRoutesByDistance(e: Event) {
+  e.preventDefault();
+  const input1 = formElement6['start'].value;
+  const input2 = formElement6['end'].value;
+  const input3 = formElement6['max'].value;
+  const result = graph.getRoutesByDistance(input1, input2, input3);
+  result.forEach((result) => {
+    formElement6.insertAdjacentHTML('afterend', `<div>${'the result is:'}${result}</div>`);
+  });
+  console.log(result);
+}
+
 // const graph = new Graph('AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7');
 
 // console.log(graph.findAmountOfRoutesByStops('A', 'C', 4));
