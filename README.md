@@ -1,5 +1,9 @@
 # healthcare logic challenge
 
+## Demo
+
+https://silly-wiles-bca069.netlify.app/
+
 ## install and run
 
 1. execute `npm install` to install all dependecies
