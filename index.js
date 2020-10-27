@@ -27,3 +27,38 @@ const routes = {
     return result;
   }
   console.log(distance(["A", "E", "B", "C", "D"]));
+
+  const graph = {
+    A: { B: 5, D: 5, E: 7 },
+    B: { C: 4 },
+    C: { D: 8, E: 8 },
+    D: { C: 8, E: 6 },
+    E: { B: 3 }
+  };
+  
+  function findRoutes(start, end, limit) {
+    const paths = [];
+  
+    function getNextNode(currentPath, currentNode, currentLimit) {
+      const restLimit = currentLimit - 1;
+      if (restLimit < 0) {
+        return;
+      }
+  
+      if (currentNode[end]) {
+        paths.push([...currentPath, end]);
+        return;
+      }
+  
+      for (const nextNode in currentNode) {
+        getNextNode([...currentPath, nextNode], graph[nextNode], restLimit)
+      }
+    }
+  
+    getNextNode([start], graph[start], limit);
+  
+    return paths
+  }
+  
+  console.log(findRoutes("C", "C", 3));
+  
